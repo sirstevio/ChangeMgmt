@@ -1,0 +1,19 @@
+@(group: ICTSystem, changes: List[Change])
+
+<li data-group="@group">
+    <span class="toggle"></span>
+    <h4 class="groupName">@group</h4>
+    <span class="loader">Loading</span>
+    <dl class="options">
+        <dt>Options</dt>
+        <dd>
+            <button class="newChange">New change</button>
+            <button class="deleteGroup">Remove group</button>
+        </dd>
+    </dl>
+    <ul>
+        @changes.map { change =>
+            @views.html.changes.item(change)
+        }
+    </ul>
+</li>

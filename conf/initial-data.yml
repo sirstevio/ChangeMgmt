@@ -1,0 +1,77 @@
+# Users
+- &bob !!models.User  
+    userid:     bob@example.com
+    name:       Bob
+    password:   secret
+
+- &jane !!models.User
+    userid:     jane@example.com
+    name:       Jane
+    password:   secret
+
+- &jeff !!models.User
+    userid:     jeff@example.com
+    name:       Jeff
+    password:   secret
+
+
+# Systems
+
+- &system1 !!models.ICTSystem
+    id:        100
+    name:      Email
+    iao:       *bob
+
+- &system2 !!models.ICTSystem
+    id:        101
+    name:      UCS
+    iao:       *jeff
+
+
+# Changes
+- &change1 !!models.Change
+    id:             10
+    summary:        Small change
+    description:    Description of a small change
+    system:         *system1
+    iaoApproved:    false
+    testApproved:   false
+
+- &change2 !!models.Change
+    id:             01
+    summary:        Bigger change
+    description:    Description of a bigger change
+    system:         *system2
+    iaoApproved:    false
+    testApproved:   false
+
+
+# Outages
+
+- &outage1 !!models.Outage
+    id:             5
+    system:         *system1
+    length:         3
+    description:    outage of email
+    change:         *change1
+
+- &outage2 !!models.Outage
+    id:             6
+    system:         *system1
+    length:         5
+    description:    outage of switch
+    change:         *change1
+
+- &outage3 !!models.Outage
+    id:             14
+    system:         *system2
+    length:         3
+    description:    outage of UCS
+    change:         *change2
+
+- &outage4 !!models.Outage
+    id:             8
+    system:         *system2
+    length:         2
+    description:    outage of VMware
+    change:         *change2

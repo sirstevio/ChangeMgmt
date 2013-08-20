@@ -1,0 +1,10 @@
+@(outage: Outage)
+
+<li data-task-id="@outage.id">
+    <h4>@outage.description</h4>
+
+
+    @if(outage.system != null && outage.system.name != null) {
+        <span class="system">@outage.system</span>
+    }
+</li>
