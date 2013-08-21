@@ -2,9 +2,9 @@
 
 <li data-task-id="@outage.id">
     <h4>@outage.description</h4>
+    <span class="system">@outage.length</span>
+	<span class="system">@outage.system.getName</span>
 
 
-    @if(outage.system != null && outage.system.name != null) {
-        <span class="system">@outage.system</span>
-    }
+    
 </li>

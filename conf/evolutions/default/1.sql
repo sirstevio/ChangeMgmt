@@ -23,6 +23,7 @@ create table ictsystem (
 
 create table outage (
   id                        bigint not null,
+  system_id                 bigint,
   length                    integer,
   description               varchar(255),
   change_id                 bigint,
@@ -48,8 +49,10 @@ alter table change add constraint fk_change_initiator_1 foreign key (initiator_u
 create index ix_change_initiator_1 on change (initiator_userid);
 alter table change add constraint fk_change_builder_2 foreign key (builder_userid) references user (userid) on delete restrict on update restrict;
 create index ix_change_builder_2 on change (builder_userid);
-alter table outage add constraint fk_outage_change_3 foreign key (change_id) references change (id) on delete restrict on update restrict;
-create index ix_outage_change_3 on outage (change_id);
+alter table outage add constraint fk_outage_system_3 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
+create index ix_outage_system_3 on outage (system_id);
+alter table outage add constraint fk_outage_change_4 foreign key (change_id) references change (id) on delete restrict on update restrict;
+create index ix_outage_change_4 on outage (change_id);
 
 
 

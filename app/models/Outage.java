@@ -9,6 +9,7 @@ public class Outage extends Model {
 
     @Id
     public Long id;
+	@ManyToOne
     public ICTSystem system;
     public int length;
     public String description;
@@ -40,4 +41,9 @@ public class Outage extends Model {
     {
         return this.description;
     }
+	
+	public String getSystemName()
+	{
+	    return this.system.getName();
+	}
 }
