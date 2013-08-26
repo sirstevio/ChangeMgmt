@@ -14,7 +14,7 @@ public class ModelsTest extends WithApplication
     @Before
     public void setUp() 
     {
-        start(fakeApplication(inMemoryDatabase()));
+        start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ModelsTest extends WithApplication
         assertEquals(3, User.find.findRowCount());
         assertEquals(1, Change.find.findRowCount());
         assertEquals(1, Outage.find.findRowCount());
-	assertEquals(1, System.find.findRowCount());
+		assertEquals(1, ICTSystem.find.findRowCount());
 
 
         assertNotNull(User.authenticate("bob@example.com", "secret"));

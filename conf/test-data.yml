@@ -17,7 +17,7 @@
 
 # Systems
 
-- &system1 !!models.System
+- &system1 !!models.ICTSystem
     id:        100
     name:      Email
     iao:       *bob
@@ -31,6 +31,7 @@
     system:         *system1
     iaoApproved:    false
     testApproved:   false
+    initiator:      *bob
 
 # Outages
 
