@@ -1,0 +1,57 @@
+@(changeForm: Form[Change], user: User)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main(user) {
+    
+    @helper.form(action = routes.Changes.add) {
+        
+        <fieldset>
+            <legend>Create a Change</legend>
+            
+            @inputText(
+                changeForm("id"), 
+                '_label -> "Change Reference", 
+                '_help -> "Please enter a valid Change Reference.",
+                '_error -> changeForm.globalError
+            )
+            
+            @inputText(
+                changeForm("summary"), 
+				'_label -> "Change Summary",
+                '_help -> "Enter a Summary of the Change.",
+				'_error -> changeForm.globalError
+            )
+			
+			@inputText(
+                changeForm("description"), 
+				'_label -> "Change Description",
+                '_help -> "Enter the full description of the Change.",
+				'_error -> changeForm.globalError
+            )
+			
+			@select(
+                changeForm("system"), 
+                options = options(ICTSystem.systems(ICTSystem.find.all)),
+                '_default -> "--- Choose a System ---",
+                '_label -> "System"
+                
+            )
+            
+        </fieldset>
+        
+
+        
+
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Sign Up">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

@@ -15,6 +15,16 @@ public class Application extends Controller {
         return ok(
 			index.render(
 				Change.find.all(),
+				User.find.byId(request().username())
+			)
+		);
+	}	
+	
+	@Security.Authenticated(Secured.class)
+    public static Result outagesOverChanges() {
+        return ok(
+			outagesoverchanges.render(
+				Change.find.all(),
 				Outage.find.all(),
 				User.find.byId(request().username())
 			)
@@ -50,6 +60,19 @@ public class Application extends Controller {
 		);
 	}
 	
+	public static Result javascriptRoutes() {
+		response().setContentType("text/javascript");
+		return ok(
+			Routes.javascriptRouter("jsRoutes",
+				controllers.routes.javascript.Changes.add(),
+				controllers.routes.javascript.Changes.delete(),
+				controllers.routes.javascript.Changes.changeSummary()
+				//controllers.routes.javascript.Changes.addChange()
+			)
+		);
+	}
+	
+	
 	//Inner class for login - leave at end of class
 	public static class Login {
 		public String email;
@@ -63,10 +86,6 @@ public class Application extends Controller {
 		}
 	}
 	
-//index.render(
-  //          Change.find.all(),
-   //         Outage.find.all()
-       // ));
-    
+	
   
 }

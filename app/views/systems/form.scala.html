@@ -1,0 +1,41 @@
+@(systemForm: Form[ICTSystem], user: User)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main(user) {
+    
+    @helper.form(action = routes.Systems.submit) {
+        
+        <fieldset>
+            <legend>Add a new System</legend>
+            
+            @inputText(
+                systemForm("id"), 
+                '_label -> "System ID", 
+                '_help -> "Please enter a valid System ID.",
+                '_error -> systemForm.globalError
+            )
+            
+            @inputText(
+                systemForm("name"), '_label -> "System Name",
+                '_help -> "Enter a System Name."
+            )
+            
+            
+        </fieldset>
+        
+
+        
+
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Sign Up">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

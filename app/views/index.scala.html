@@ -1,30 +1,18 @@
-@(changes: List[Change], todooutages: List[Outage], user: User)
+@(changes: List[Change], user: User)
 
-@main(changes, user) {
+@main(user) {
 
     <header>
         <hgroup>
             <h1>Dashboard</h1>
-            <h2>Outages over all changes</h2>
         </hgroup>
     </header>
-
-
-    <article  class="outages">
-        @todooutages.groupBy(_.change).map {
-            case (change, outages) => {
-                <div class="folder" data-folder-id="@change.id">
-                    <header>
-                        <h3>@change.getSummary</h3>
-                    </header>
-                        <ul class="list">
-                            @outages.map { outage =>
-                                @views.html.outages.item(outage)
-                            }
-                        </ul>
-                </div>
-            }
-        }
+	
+	<article  class="changes">
+		
+        
     </article>
+
+
 
 }

@@ -12,10 +12,13 @@ public class Change extends Model {
     public Date initiated;
     public String summary;
     public String description;
-    public ICTSystem system;
+	
     public boolean iaoApproved;
     public boolean testApproved;
 
+	@ManyToOne
+    public ICTSystem system;
+	
     @ManyToOne
     public User initiator;
 
@@ -35,37 +38,32 @@ public class Change extends Model {
     }
 	*/
 	
-	
-	public Change(String summary, String description, User initiator, ICTSystem system) {
+	public Change(String id, String summary, String description, User initiator, String system) {
+		this.id = stringLongConverter(id);
 		this.summary = summary;
         this.description = description;
         this.initiator = initiator;
-        this.system = system;
+        this.system = ICTSystem.find.where().eq("name", system).findUnique();
+		System.out.println("Using Z");
 	}
 	
     public static Model.Finder<Long,Change> find = new Model.Finder(Long.class, Change.class);
 	
-	/**
-	*	Create a new change request
-	*
-    public static Change create (String summary, String description, String initiator, String builder, Long system) {
-        Change change = new Change(summary, description, User.find.ref(initiator),User.find.ref(builder),ICTSystem.find.ref(system));
-        change.save();
-        return change;
-    }
-	*/
-	
-	public static Change create (String summary, String description, String initiator, String system) {		
+
+	public static Change create(String id, String summary, String description, User initiator, String system) {		
+		//debug
+		System.out.println("Using C");
+		System.out.println(id);
+		System.out.println(summary);
+		System.out.println(description);
+		System.out.println(initiator);
+		System.out.println(system);
 		
-		Change change = new Change(summary, description, User.find.ref(initiator),
-				ICTSystem.find.ref(stringLongConverter(system)));
+		Change change = new Change(id, summary, description, initiator, system);		
 		change.save();
 		return change;
 	}
 
-//    public static List<Project> findInvolving(String user) {
-//        return find.where().eq("members.email", user).findList();
-//    }
     public String getSummary(){
         return this.summary;
     }
@@ -106,4 +104,66 @@ public class Change extends Model {
 		}
 		return returnMe;
 	}
+	
+	public String toString() {
+		return this.summary + " " + this.description;
+	}
+	
+	/**Old code not needed now
+		public Change(String id, String summary, String description, User initiator, ICTSystem system) {
+		this.id = stringLongConverter(id);
+		this.summary = summary;
+        this.description = description;
+        this.initiator = initiator;
+        this.system = system;
+		System.out.println("Using X");
+	}
+	//temporary overload
+	public Change(Long id, String summary, String description, User initiator, ICTSystem system) {
+		this.id = id;
+		this.summary = summary;
+        this.description = description;
+        this.initiator = initiator;
+        this.system = system;
+		System.out.println("Using Y");
+	}
+	//temporary overload
+		/**
+	*	Create a new change request
+	*
+    public static Change create (String summary, String description, String initiator, String builder, Long system) {
+        Change change = new Change(summary, description, User.find.ref(initiator),User.find.ref(builder),ICTSystem.find.ref(system));
+        change.save();
+        return change;
+    }	
+	public static Change create(String summary, String description, String initiator, String system) {		
+		
+		Change change = new Change(summary, description, User.find.ref(initiator),
+				ICTSystem.find.ref(stringLongConverter(system)));
+		System.out.println("Using A");
+		change.save();
+		return change;
+	}
+	//temporary overload
+	public static Change create(Long id, String summary, String description, User initiator, ICTSystem system) {		
+		//debug
+		System.out.println("Using B");
+		System.out.println(id);
+		System.out.println(summary);
+		System.out.println(description);
+		System.out.println(initiator);
+		System.out.println(system);
+		
+		Change change = new Change(id, summary, description, initiator, system);
+		
+		change.save();
+		return change;
+	}
+	//temporary overload
+	
+    public static List<Project> findInvolving(String user) {
+        return find.where().eq("members.email", user).findList();
+    } .find.ref(stringLongConverter(system))
+	
+	*/
 }

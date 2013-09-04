@@ -1,0 +1,21 @@
+@(systems: List[ICTSystem])
+
+<li>
+    <span class="toggle"></span>
+    <h4 class="systemName">Testinfo</h4>
+    <span class="loader">Loading</span>
+    <dl class="options">
+        <dt>Options</dt>
+        <dd>
+            <button class="newSystem">Create new system</button>
+            <button class="deleteSystem">Remove system</button>
+        </dd>
+    </dl>
+    <ul class="list">
+		@systems.map { system =>
+        @views.html.systems.item(system)
+		}
+	</ul>
+</li>
+
+

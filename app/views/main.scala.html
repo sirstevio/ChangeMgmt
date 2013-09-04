@@ -1,33 +1,55 @@
-@(changes: List[Change], user: User)(body: Html)
+@(user: User)(body: Html)
 
 <html>
     <head>
         <title>Change Management</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <!--link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")"-->
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.css")">
         <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.1.js")"></script>
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-play-1.7.1.js")"></script>
+		<!--script type="text/javascript" src="@routes.Assets.at("javascripts/underscore-min.js")"></script>
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/backbone-min.js")"></script>
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script-->
+		<script type="text/javascript" src="@routes.Assets.at("bootstrap/js/bootstrap.js")"></script>
     </head>
     <body>
-        <header>
-            <a href="@routes.Application.index" id="logo"><span>Change</span>Management</a>
-			<dl id="user">
-				<dt>@user.name <span>(@user.userid)</span></dt>
-				<dd>
-					<a href="@routes.Application.logout()">Logout</a>
-				</dd>
-			</dl>
-        </header>
-        <nav>
-            <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
-            <ul id="changes">
-                @changes.groupBy(_.system).map {
-                    case (group, changes) => {
-                        @views.html.changes.group(group, changes)
-                    }
-                }
-            </ul>
-        </nav>
-        <section id="main">
-            @body
-        </section>
+		<div id="fix-for-navbar-fixed-top-spacing" style="height: 42px;">&nbsp;</div>
+		<div class="container">
+		<div class="row">
+		<nav class="navbar navbar-default" role="navigation">
+			<a class="navbar-brand" href="./">ChangeManagement</a>
+			<ul class="nav pull-right">
+                <li id="fat-menu" class="dropdown">
+                    <a href="" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">@user.name <span>(@user.userid)</span><b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="@routes.Application.logout()">Logout</a></li>
+                    </ul>
+                </li>
+			</ul>
+		</nav>
+		</div>
+		<div class="row well">
+			<div class="col-xs-6 col-sm-3 sidebar" id="sidebar" role="navigation">
+			
+            <ul class="nav">
+					<li><label class="tree-toggle nav-header">Changes</label></li>
+					<li class=""><a href="/changes/new"><i class="glyphicon glyphicon-chevron-right"></i> New Change</a></li>
+					<li><a href="/changes"><i class="glyphicon glyphicon-chevron-right"></i> View Changes</a></li>
+					<li><label class="tree-toggle nav-header">Systems</label></li>
+					<li><a href="/systems/new"><i class="glyphicon glyphicon-chevron-right"></i> New System</a></li>
+					<li><a href="/systems"><i class="glyphicon glyphicon-chevron-right"></i> View Systems</a></li>
+			</ul>
+			</div>
+						
+			<div class="col-md-9 well">
+			@body
+			</div>
+			
+		</div>
+		</div>
     </body>
 </html>

@@ -10,6 +10,7 @@ create table change (
   description               varchar(255),
   iao_approved              boolean,
   test_approved             boolean,
+  system_id                 bigint,
   initiator_userid          varchar(255),
   builder_userid            varchar(255),
   constraint pk_change primary key (id))
@@ -18,6 +19,7 @@ create table change (
 create table ictsystem (
   id                        bigint not null,
   name                      varchar(255),
+  iao_userid                varchar(255),
   constraint pk_ictsystem primary key (id))
 ;
 
@@ -45,14 +47,18 @@ create sequence outage_seq;
 
 create sequence user_seq;
 
-alter table change add constraint fk_change_initiator_1 foreign key (initiator_userid) references user (userid) on delete restrict on update restrict;
-create index ix_change_initiator_1 on change (initiator_userid);
-alter table change add constraint fk_change_builder_2 foreign key (builder_userid) references user (userid) on delete restrict on update restrict;
-create index ix_change_builder_2 on change (builder_userid);
-alter table outage add constraint fk_outage_system_3 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
-create index ix_outage_system_3 on outage (system_id);
-alter table outage add constraint fk_outage_change_4 foreign key (change_id) references change (id) on delete restrict on update restrict;
-create index ix_outage_change_4 on outage (change_id);
+alter table change add constraint fk_change_system_1 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
+create index ix_change_system_1 on change (system_id);
+alter table change add constraint fk_change_initiator_2 foreign key (initiator_userid) references user (userid) on delete restrict on update restrict;
+create index ix_change_initiator_2 on change (initiator_userid);
+alter table change add constraint fk_change_builder_3 foreign key (builder_userid) references user (userid) on delete restrict on update restrict;
+create index ix_change_builder_3 on change (builder_userid);
+alter table ictsystem add constraint fk_ictsystem_iao_4 foreign key (iao_userid) references user (userid) on delete restrict on update restrict;
+create index ix_ictsystem_iao_4 on ictsystem (iao_userid);
+alter table outage add constraint fk_outage_system_5 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
+create index ix_outage_system_5 on outage (system_id);
+alter table outage add constraint fk_outage_change_6 foreign key (change_id) references change (id) on delete restrict on update restrict;
+create index ix_outage_change_6 on outage (change_id);
 
 
 

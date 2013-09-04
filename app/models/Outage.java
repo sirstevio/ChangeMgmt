@@ -41,9 +41,5 @@ public class Outage extends Model {
     {
         return this.description;
     }
-	
-	public String getSystemName()
-	{
-	    return this.system.getName();
-	}
+
 }

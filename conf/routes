@@ -9,9 +9,23 @@ GET     /                           controllers.Application.index()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET		/login						controllers.Application.login()
+GET     /assets/javascripts/routes  controllers.Application.javascriptRoutes()
+GET     /logout                     controllers.Application.logout()
 
 POST	/login						controllers.Application.authenticate()
-GET     /logout                     controllers.Application.logout()
-POST    /changes                   controllers.Changes.add()
-DELETE  /changes/:change          controllers.Changes.delete(change: Long)
-PUT     /changes/:change          controllers.Changes.changeSummary(change: Long)
+
+
+PUT     /changes/:change          	controllers.Changes.changeSummary(change: Long)
+
+DELETE  /changes/:change          	controllers.Changes.delete(change: Long)
+
+# New area working on...
+GET		/changes					controllers.Changes.viewChanges()
+GET		/changes/new				controllers.Changes.blank()
+POST    /changes/new               	controllers.Changes.add()
+
+GET		/outages					controllers.Application.outagesOverChanges()
+GET		/systems					controllers.Systems.viewSystems()
+
+GET		/systems/new				controllers.Systems.blank()
+POST    /systems/new                controllers.Systems.submit()

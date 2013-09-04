@@ -2,10 +2,10 @@
 
 <li data-task-id="@change.id">
     @change.id</br>
-	@change.description</br>
-	@change.system.name</br>
 	<input type="checkbox" value=@change.iaoApproved></br>
+	@change.description</br>
+	@change.system.name/br>
 	
     <button class="delete" href="@routes.Changes.delete(change.id)">Delete</button>
-    
+    <span class="loader">Loading</span>
 </li>

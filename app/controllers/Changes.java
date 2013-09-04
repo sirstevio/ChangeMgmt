@@ -17,13 +17,56 @@ public class Changes extends Controller {
 	*/
 	public static Result add() {
 		Change newChange= Change.create(
-			"New change", form().bindFromRequest().get("description"), request().username(),
+			form().bindFromRequest().get("id"), form().bindFromRequest().get("summary"),
+			form().bindFromRequest().get("description"), User.find.byId(request().username()), 
 			form().bindFromRequest().get("system")
-			
 		);
-		return ok(item.render(newChange));
+		System.out.println("Using add");
+		return redirect(routes.Changes.viewChanges());
 	}
 	
+	public static Result viewChanges() {
+		return ok(
+			viewchanges.render(
+				Change.find.all(),
+				User.find.byId(request().username())
+			)
+		);
+	}
+	
+	/**
+	*	Defines a form wrapping the Change class
+	*/
+	final static Form<Change> newChangeForm = form(Change.class);
+	
+	/**
+     * Display a blank form.
+     */ 
+    public static Result blank() {
+        return ok(form.render(newChangeForm, User.find.byId(request().username())));
+    }
+	/**	
+	public static Result submit() {
+		Form<Change> filledForm = newChangeForm.bindFromRequest();
+		//debug
+				System.out.println(filledForm.get().id);
+				System.out.println(filledForm.get().summary);
+				System.out.println(filledForm.get().description);
+				System.out.println(User.find.byId(request().username()));
+				System.out.println(filledForm.get().system);
+				System.out.println(filledForm.toString());
+		
+		if(filledForm.hasErrors()) {
+				return badRequest(form.render(filledForm, User.find.byId(request().username())));
+			} else {
+				Change.create(filledForm.get().id, filledForm.get().summary,  filledForm.get().description, User.find.byId(request().username()),  filledForm.get().system);
+				//Change created = filledForm.get();
+				System.out.println("Using submit");
+				return redirect(routes.Changes.viewChanges());
+			}
+	}*/
+		
+		
 	/**
 	*	Change the summary of a change through this method.
 	*/

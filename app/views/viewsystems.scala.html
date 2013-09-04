@@ -1,0 +1,31 @@
+@(systems: List[ICTSystem], user: User)
+
+@main(user) {
+
+    <header>
+        <hgroup>
+            <h1>Dashboard</h1>
+            <h2>All ICT Systems</h2>
+        </hgroup>
+    </header>
+
+
+    <article  class="systems">
+		@systems.groupBy(_.iao).map {
+            case (iao, systems) => {
+                <div class="folder" data-folder-id="@iao.userid">
+                    <header>
+                        <h3>@iao.userid</h3>
+                    </header>
+                        <ul class="list">
+                            @systems.map { system =>
+                                @views.html.systems.item(system)
+                            }
+                        </ul>
+                </div>
+            }
+        }
+
+    </article>
+
+}

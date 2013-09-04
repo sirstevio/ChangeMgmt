@@ -19,59 +19,76 @@
 
 - &system1 !!models.ICTSystem
     id:        100
-    name:      Email
+    name:      Email system
     iao:       *bob
 
 - &system2 !!models.ICTSystem
     id:        101
-    name:      UCS
+    name:      Blogsite
     iao:       *jeff
+
+- &system3 !!models.ICTSystem
+    id:        102
+    name:      External website
+    iao:       *jeff
+
+- &system4 !!models.ICTSystem
+    id:        104
+    name:      Comms room power system (UPS)
+    iao:       *jane
 
 
 # Changes
 - &change1 !!models.Change
-    id:             10
-    summary:        Small change
-    description:    Description of a small change
+    id:             01
+    summary:        Apply patches to web server
+    description:    Patch the web server with the latest microsoft patches
+    system:         *system3
+    iaoApproved:    true
+    testApproved:   false
+
+- &change2 !!models.Change
+    id:             02
+    summary:        Relocate email server
+    description:    Email server needs moved to another room due to UPS capacity
     system:         *system1
     iaoApproved:    false
     testApproved:   false
 
-- &change2 !!models.Change
-    id:             01
-    summary:        Bigger change
-    description:    Description of a bigger change
-    system:         *system2
+- &change3 !!models.Change
+    id:             03
+    summary:        New BusBar installed
+    description:    New busbar being installed means all power is off
+    system:         *system4
     iaoApproved:    false
     testApproved:   false
-
 
 # Outages
 
 - &outage1 !!models.Outage
     id:             5
-    system:         *system1
+    system:         *system3
     length:         3
-    description:    outage of email
+    description:    outage of webserver means no website
     change:         *change1
 
 - &outage2 !!models.Outage
     id:             6
-    system:         *system1
+    system:         *system2
     length:         5
-    description:    outage of switch
+    description:    outage of webserver means no access to blogsite
     change:         *change1
 
 - &outage3 !!models.Outage
     id:             14
-    system:         *system2
+    system:         *system1
     length:         3
-    description:    outage of UCS
+    description:    outage of email while server is moved
     change:         *change2
 
 - &outage4 !!models.Outage
     id:             8
-    system:         *system2
+    system:         *system4
     length:         2
-    description:    outage of VMware
-    change:         *change2
+    description:    outage of power to comms room
+    change:         *change3

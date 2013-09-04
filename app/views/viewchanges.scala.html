@@ -1,0 +1,30 @@
+@(changes: List[Change], user: User)
+
+@main(user) {
+
+	<ol class="breadcrumb">
+		<li><a href="#">Dashboard</a></li>
+		<li class="active">All changes</li>
+	</ol>
+
+
+
+    <article  class="changes">
+		@changes.groupBy(_.summary).map {
+            case (summary, changes) => {
+                <div class="folder" data-folder-id="@summary">
+                    <header>
+                        <h3>@summary</h3>
+                    </header>
+                        <ul class="list">
+                            @changes.map { change =>
+                                @views.html.changes.item(change)
+                            }
+                        </ul>
+                </div>
+            }
+        }
+
+    </article>
+
+}

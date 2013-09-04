@@ -1,9 +1,9 @@
 @(outage: Outage)
 
-<li data-task-id="@outage.id">
+<li data-group="@outage.id">
     <h4>@outage.description</h4>
-    <span class="system">@outage.length</span>
-	<span class="system">@outage.system.getName</span>
+    <span class="systemname">System affected: @outage.system.name</span>
+	<span class="length">@outage.length</span>
 
 
     
