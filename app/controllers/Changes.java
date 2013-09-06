@@ -17,7 +17,7 @@ public class Changes extends Controller {
 	*/
 	public static Result add() {
 		Change newChange= Change.create(
-			form().bindFromRequest().get("id"), form().bindFromRequest().get("summary"),
+			form().bindFromRequest().get("summary"),
 			form().bindFromRequest().get("description"), User.find.byId(request().username()), 
 			form().bindFromRequest().get("system")
 		);

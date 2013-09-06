@@ -4,10 +4,14 @@ import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.*;
 
+import controllers.Helper;
+
 @Entity
 public class Change extends Model {
 
     @Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="change_seq_gen")
+	@SequenceGenerator(name="change_seq_gen", sequenceName="CHANGE_SEQ", allocationSize=1, initialValue=1)
     public Long id;
     public Date initiated;
     public String summary;
@@ -28,38 +32,29 @@ public class Change extends Model {
 //    @OneToMany(cascade = CascadeType.PERSIST)
 //    public List<Outage> outages = new ArrayList<Outage>();
 
-	/**
-    public Change(String summary, String description, User initiator, User builder, ICTSystem system) {
-        this.summary = summary;
-        this.description = description;
-        this.initiator = initiator;
-        this.builder = builder;
-        this.system = system;
-    }
-	*/
-	
-	public Change(String id, String summary, String description, User initiator, String system) {
-		this.id = stringLongConverter(id);
+	public Change(String summary, String description, User initiator, ICTSystem system) {
+		//this.id = id;
 		this.summary = summary;
         this.description = description;
         this.initiator = initiator;
-        this.system = ICTSystem.find.where().eq("name", system).findUnique();
+        this.system = system;
 		System.out.println("Using Z");
 	}
 	
     public static Model.Finder<Long,Change> find = new Model.Finder(Long.class, Change.class);
 	
 
-	public static Change create(String id, String summary, String description, User initiator, String system) {		
+	public static Change create(String summary, String description, User initiator, String system) {		
 		//debug
 		System.out.println("Using C");
-		System.out.println(id);
+		//System.out.println(id);
 		System.out.println(summary);
 		System.out.println(description);
 		System.out.println(initiator);
 		System.out.println(system);
 		
-		Change change = new Change(id, summary, description, initiator, system);		
+		Change change = new Change(summary, description, initiator, 
+									ICTSystem.find.where().eq("name", system).findUnique());
 		change.save();
 		return change;
 	}
@@ -89,27 +84,20 @@ public class Change extends Model {
 		return newSummary;
 	}
 	
-	
-	/**
-	*	Helper method to convert String to Long. (dirty)
-	*/
-	private static Long stringLongConverter(String value) {
-		long returnMe;
-		returnMe = 0;
-		try 
-		{
-			returnMe = Long.parseLong(value);
-		} catch (NumberFormatException nfe) {
-			System.out.println("NumberFormatException: " + nfe.getMessage());
-		}
-		return returnMe;
-	}
-	
 	public String toString() {
 		return this.summary + " " + this.description;
 	}
 	
 	/**Old code not needed now
+	
+    public Change(String summary, String description, User initiator, User builder, ICTSystem system) {
+        this.summary = summary;
+        this.description = description;
+        this.initiator = initiator;
+        this.builder = builder;
+        this.system = system;
+    }
+	
 		public Change(String id, String summary, String description, User initiator, ICTSystem system) {
 		this.id = stringLongConverter(id);
 		this.summary = summary;
@@ -166,4 +154,11 @@ public class Change extends Model {
     } .find.ref(stringLongConverter(system))
 	
 	*/
+		/**
+	* 	Helper method to turn a list of Objects into a list of Strings using 
+	*	the objects toString method
+	*/
+	public static List<String> changeListAsStrings(List<Change> oldList) {
+		return Helper.listAsStrings(oldList);
+	}
 }

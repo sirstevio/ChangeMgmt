@@ -20,6 +20,7 @@ create table ictsystem (
   id                        bigint not null,
   name                      varchar(255),
   iao_userid                varchar(255),
+  system_owner_userid       varchar(255),
   constraint pk_ictsystem primary key (id))
 ;
 
@@ -55,10 +56,12 @@ alter table change add constraint fk_change_builder_3 foreign key (builder_useri
 create index ix_change_builder_3 on change (builder_userid);
 alter table ictsystem add constraint fk_ictsystem_iao_4 foreign key (iao_userid) references user (userid) on delete restrict on update restrict;
 create index ix_ictsystem_iao_4 on ictsystem (iao_userid);
-alter table outage add constraint fk_outage_system_5 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
-create index ix_outage_system_5 on outage (system_id);
-alter table outage add constraint fk_outage_change_6 foreign key (change_id) references change (id) on delete restrict on update restrict;
-create index ix_outage_change_6 on outage (change_id);
+alter table ictsystem add constraint fk_ictsystem_systemOwner_5 foreign key (system_owner_userid) references user (userid) on delete restrict on update restrict;
+create index ix_ictsystem_systemOwner_5 on ictsystem (system_owner_userid);
+alter table outage add constraint fk_outage_system_6 foreign key (system_id) references ictsystem (id) on delete restrict on update restrict;
+create index ix_outage_system_6 on outage (system_id);
+alter table outage add constraint fk_outage_change_7 foreign key (change_id) references change (id) on delete restrict on update restrict;
+create index ix_outage_change_7 on outage (change_id);
 
 
 

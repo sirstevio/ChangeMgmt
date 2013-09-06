@@ -10,7 +10,8 @@ public class Secured extends Security.Authenticator {
 
     @Override
     public String getUsername(Context ctx) {
-        return ctx.session().get("email");
+        //System.out.println(ctx.session().get("email"));
+		return ctx.session().get("email");
     }
 
     @Override
@@ -19,9 +20,9 @@ public class Secured extends Security.Authenticator {
     }
 	
 	public static boolean isInitiatorOf(Long change) {
-    return Change.isInitiator(
-        change,
-        Context.current().request().username()
-    );
-}
+		return Change.isInitiator(
+			change,
+			Context.current().request().username()
+		);
+	}
 }

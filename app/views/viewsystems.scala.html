@@ -1,14 +1,10 @@
 @(systems: List[ICTSystem], user: User)
 
 @main(user) {
-
-    <header>
-        <hgroup>
-            <h1>Dashboard</h1>
-            <h2>All ICT Systems</h2>
-        </hgroup>
-    </header>
-
+	<ol class="breadcrumb">
+		<li><a href="#">Dashboard</a></li>
+		<li class="active">All Systems</li>
+	</ol>
 
     <article  class="systems">
 		@systems.groupBy(_.iao).map {

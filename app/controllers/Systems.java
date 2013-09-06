@@ -16,7 +16,13 @@ public class Systems extends Controller {
 	*	Add a new system through this method.
 	*/
 	public static Result add() {
-		return TODO;
+		ICTSystem newSystem= ICTSystem.create(
+			form().bindFromRequest().get("name"),
+			form().bindFromRequest().get("iao"),
+			form().bindFromRequest().get("systemOwner")
+		);
+		System.out.println("Using add");
+		return redirect(routes.Systems.viewSystems());
 	}
 	
 	/**
@@ -34,7 +40,7 @@ public class Systems extends Controller {
 	/**
      * Handle the form submission.
      */
-    public static Result submit() {
+    /**public static Result submit() {
         Form<ICTSystem> filledForm = newSystemForm.bindFromRequest();                
         System.out.println(filledForm.toString());
 		
@@ -45,20 +51,19 @@ public class Systems extends Controller {
                 filledForm.reject("username", "This username is already taken");
             }
 			}
-		*/
+		
 			if(filledForm.hasErrors()) {
 				return badRequest(form.render(filledForm, User.find.byId(request().username())));
 			} else {
-				ICTSystem.create(filledForm.get().name, filledForm.get().id);
+				ICTSystem.create(filledForm.get().name, filledForm.get().iao, filledForm.get().systemOwner);
 				return redirect(routes.Systems.viewSystems());
 			}
-        }
+        }*/
 	
 	/**
 	*	View all systems
 	*/
 	public static Result viewSystems() {
-		//return TODO;
 		return ok(
 			viewsystems.render(
 				ICTSystem.find.all(),

@@ -13,13 +13,6 @@
             <legend>Create a Change</legend>
             
             @inputText(
-                changeForm("id"), 
-                '_label -> "Change Reference", 
-                '_help -> "Please enter a valid Change Reference.",
-                '_error -> changeForm.globalError
-            )
-            
-            @inputText(
                 changeForm("summary"), 
 				'_label -> "Change Summary",
                 '_help -> "Enter a Summary of the Change.",
@@ -35,7 +28,7 @@
 			
 			@select(
                 changeForm("system"), 
-                options = options(ICTSystem.systems(ICTSystem.find.all)),
+                options = options(ICTSystem.systemListAsStrings(ICTSystem.find.all)),
                 '_default -> "--- Choose a System ---",
                 '_label -> "System"
                 

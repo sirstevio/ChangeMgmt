@@ -1,0 +1,58 @@
+@(outageForm: Form[Outage], user: User)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+
+@main(user) {
+    
+    @helper.form(action = routes.Outages.add) {
+        
+        <fieldset>
+            <legend>Create an Outage</legend>
+
+            @inputText(
+                outageForm("length"), 
+				'_label -> "Outage length",
+                '_help -> "Enter the length of the Outage.",
+				'_error -> outageForm.globalError
+            )
+			
+			@inputText(
+                outageForm("description"), 
+				'_label -> "Outage Description",
+                '_help -> "Enter the full description of the Outage.",
+				'_error -> outageForm.globalError
+            )
+			
+			@select(
+                outageForm("system"), 
+                options = options(ICTSystem.systemListAsStrings(ICTSystem.find.all)),
+                '_default -> "--- Choose a System ---",
+                '_label -> "System affected: "
+                
+            )
+			
+			@select(
+                outageForm("change"), 
+                options = options(Change.changeListAsStrings(Change.find.all)),
+                '_default -> "--- Choose a System ---",
+                '_label -> "Change this outage is associate with:"
+                
+            )
+            
+        </fieldset>
+        
+
+        
+
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Sign Up">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

@@ -1,0 +1,38 @@
+@(loginForm: Form[Application.Login])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+	
+        @helper.form(action = routes.Application.authenticate) {
+        
+        <fieldset>
+            <legend>Login</legend>
+            
+                        
+            @inputText(
+                loginForm("email"), 
+				'_label -> "Enter email",
+                '_help -> "Enter email.",
+				'_error -> loginForm.globalError
+            )
+			
+			@inputText(
+                loginForm("password"), 
+				'_label -> "Enter password",
+                '_error -> loginForm.globalError
+            )
+            
+        </fieldset>
+        
+
+        
+
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Submit">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+}

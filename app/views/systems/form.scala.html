@@ -7,24 +7,32 @@
 
 @main(user) {
     
-    @helper.form(action = routes.Systems.submit) {
+    @helper.form(action = routes.Systems.add) {
         
         <fieldset>
             <legend>Add a new System</legend>
-            
-            @inputText(
-                systemForm("id"), 
-                '_label -> "System ID", 
-                '_help -> "Please enter a valid System ID.",
-                '_error -> systemForm.globalError
-            )
             
             @inputText(
                 systemForm("name"), '_label -> "System Name",
                 '_help -> "Enter a System Name."
             )
             
-            
+            @select(
+                systemForm("iao"), 
+                options = options(User.userListAsStrings(User.find.all)),
+                '_default -> "--- Select the IAO for the System ---",
+                '_label -> "System IAO"
+                
+            )
+			
+			@select(
+                systemForm("systemOwner"), 
+                options = options(User.userListAsStrings(User.find.all)),
+                '_default -> "--- Select the Owner for the System ---",
+                '_label -> "System Owner"
+                
+            )
+			
         </fieldset>
         
 

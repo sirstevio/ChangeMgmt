@@ -4,6 +4,7 @@ import play.*;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
+import java.util.List;
 
 import models.*;
 import views.html.*;
@@ -38,11 +39,15 @@ public class Application extends Controller {
 	}
 	
 	public static Result authenticate() {
+		System.out.println("Entering Application.authenticate method");
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
+		System.out.println(loginForm.get());
 		if (loginForm.hasErrors()) {
+			System.out.println("hasErrors is true");
 			return badRequest(login.render(loginForm));
 		} 
 		else {
+			System.out.println("hasErrors is false");
 			session().clear();
 			session("email", loginForm.get().email);
 			return redirect(
@@ -80,12 +85,12 @@ public class Application extends Controller {
 		
 		public String validate() {
 			if(User.authenticate(email, password) == null) {
+				System.out.println("Failing test at inner class validate");
 				return "Invalid user or password";
 			}
 			return null;
 		}
 	}
 	
-	
-  
+
 }

@@ -24,8 +24,10 @@ GET		/changes					controllers.Changes.viewChanges()
 GET		/changes/new				controllers.Changes.blank()
 POST    /changes/new               	controllers.Changes.add()
 
-GET		/outages					controllers.Application.outagesOverChanges()
-GET		/systems					controllers.Systems.viewSystems()
+GET		/outages					controllers.Outages.viewOutages()
+GET		/outages/new				controllers.Outages.blank()
+POST    /outages/new                controllers.Outages.add()
 
+GET		/systems					controllers.Systems.viewSystems()
 GET		/systems/new				controllers.Systems.blank()
-POST    /systems/new                controllers.Systems.submit()
+POST    /systems/new                controllers.Systems.add()
