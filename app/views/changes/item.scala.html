@@ -4,6 +4,8 @@
     @change.id</br>
 	@change.description</br>
 	@change.system.name</br>
+	@change.status</br>
+	@change.iaoApproved @change.testApproved @change.sysOwnApproved @change.infAssurApproved 
 	<input type="checkbox" value=@change.iaoApproved></br>
 	
     <button class="delete" href="@routes.Changes.delete(change.id)">Delete</button>

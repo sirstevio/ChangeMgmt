@@ -9,10 +9,14 @@ create table change (
   summary                   varchar(255),
   description               varchar(255),
   iao_approved              boolean,
+  sys_own_approved          boolean,
   test_approved             boolean,
+  inf_assur_approved        boolean,
+  status                    integer,
   system_id                 bigint,
   initiator_userid          varchar(255),
   builder_userid            varchar(255),
+  constraint ck_change_status check (status in (0,1,2,3,4,5)),
   constraint pk_change primary key (id))
 ;
 

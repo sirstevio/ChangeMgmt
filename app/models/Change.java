@@ -18,14 +18,16 @@ public class Change extends Model {
     public String description;
 	
     public boolean iaoApproved;
+	public boolean sysOwnApproved;
     public boolean testApproved;
+    public boolean infAssurApproved;
+	
+	public Status status;
 
 	@ManyToOne
-    public ICTSystem system;
-	
+    public ICTSystem system;	
     @ManyToOne
     public User initiator;
-
     @ManyToOne
     public User builder;
 
@@ -39,6 +41,11 @@ public class Change extends Model {
         this.initiator = initiator;
         this.system = system;
 		System.out.println("Using Z");
+		this.iaoApproved = false;
+		this.sysOwnApproved = false;
+		this.testApproved = false;
+		this.infAssurApproved = false;
+		this.status = Status.NEW;
 	}
 	
     public static Model.Finder<Long,Change> find = new Model.Finder(Long.class, Change.class);
@@ -160,5 +167,14 @@ public class Change extends Model {
 	*/
 	public static List<String> changeListAsStrings(List<Change> oldList) {
 		return Helper.listAsStrings(oldList);
+	}
+	
+	private enum Status {
+			NEW, 
+			ASSESSMENT, 
+			AUTHORISATION,
+			IMPLEMENTATION,
+			POSTIMPLEMENTATION,
+			COMPLETE
 	}
 }

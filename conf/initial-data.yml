@@ -14,47 +14,65 @@
     name:       Jeff
     password:   secret
 
+- &jimbob !!models.User
+    userid:     jimbob@example.com
+    name:       Jimbob
+    password:   secret
+
 
 # Systems
 
 - &system1 !!models.ICTSystem
-    name:      Email system
-    iao:       *bob
+    name:        Email system
+    iao:         *bob
+    systemOwner: *jimbob
 
 - &system2 !!models.ICTSystem
-    name:      Blogsite
-    iao:       *jeff
+    name:        Blogsite
+    iao:         *jeff
+    systemOwner: *jane
 
 - &system3 !!models.ICTSystem
-    name:      External website
-    iao:       *jeff
+    name:        External website
+    iao:         *jeff
+    systemOwner: *jane
 
 - &system4 !!models.ICTSystem
-    name:      Comms room power system (UPS)
-    iao:       *jane
+    name:        Comms room power system (UPS)
+    iao:         *jane
+    systemOwner: *jimbob
 
 
 # Changes
 - &change1 !!models.Change
-    summary:        Apply patches to web server
-    description:    Patch the web server with the latest microsoft patches
-    system:         *system3
-    iaoApproved:    true
-    testApproved:   false
+    summary:          Apply patches to web server
+    description:      Patch the web server with the latest microsoft patches
+    system:           *system3
+    iaoApproved:      false
+    testApproved:     true
+    sysOwnApproved:   false
+    infAssurApproved: false
+    status:           ASSESSMENT
 
 - &change2 !!models.Change
-    summary:        Relocate email server
-    description:    Email server needs moved to another room due to UPS capacity
-    system:         *system1
-    iaoApproved:    false
-    testApproved:   false
+    summary:          Relocate email server
+    description:      Email server needs moved to another room due to UPS capacity
+    system:           *system1
+    iaoApproved:      false
+    testApproved:     false
+    sysOwnApproved:   true
+    infAssurApproved: false
+    status:           ASSESSMENT
 
 - &change3 !!models.Change
-    summary:        New BusBar installed
-    description:    New busbar being installed means all power is off
-    system:         *system4
-    iaoApproved:    false
-    testApproved:   false
+    summary:          New BusBar installed
+    description:      New busbar being installed means all power is off
+    system:           *system4
+    iaoApproved:      false
+    testApproved:     false
+    sysOwnApproved:   false
+    infAssurApproved: false
+    status:           NEW
 
 # Outages
 
