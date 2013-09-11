@@ -2,26 +2,17 @@
 
 @main(user) {
 	<ol class="breadcrumb">
-		<li><a href="#">Dashboard</a></li>
+		<li><a href="/">Dashboard</a></li>
 		<li class="active">All Outages</li>
 	</ol>
 
-    <article  class="outages">
-		@outages.groupBy(_.system).map {
+	<div class="accordion-group" id="accordion1">
+	@outages.groupBy(_.system).map {
             case (system, outages) => {
-                <div class="folder" data-folder-id="@system.name">
-                    <header>
-                        <h3>@system.name</h3>
-                    </header>
-                        <ul class="list">
-                            @outages.map { outage =>
+						@outages.map { outage =>
                                 @views.html.outages.item(outage)
-                            }
-                        </ul>
-                </div>
-            }
-        }
-
-    </article>
-
+						}
+		}
+	}
+	</div>
 }

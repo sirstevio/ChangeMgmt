@@ -1,7 +1,22 @@
 @(system: ICTSystem)
 
-<li data-task-id="@system.id">
-    @system.name
-	@system.iao.name
-	@system.id
-</li>
+
+
+	<div class="accordion-group  panel-default">
+			<div class="accordion-heading">
+			<div class="panel-heading">
+				<a class="accordion-toggle" data-parent="accordion1" data-toggle="collapse" href="#panel@system.id">
+				@system.name
+				<span class="badge pull-right">@system.id</span></a>
+			</div>
+			</div>
+			<div class="accordion-body collapse" id="panel@system.id">
+			<div class="panel-body">
+				<div class="accordion-inner">
+					<span class="text-muted">System Owner:</span> @system.systemOwner.name (@system.systemOwner.userid)</br>
+					<span class="text-muted">Information Asset Owner:</span> @system.iao.name (@system.iao.userid)		
+					<button type="button" class="btn btn-primary pull-right btn-sm" href="@routes.Systems.delete(system.id)">Delete</button>
+				</div>
+			</div>
+			</div>
+		</div>

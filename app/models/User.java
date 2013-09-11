@@ -34,7 +34,7 @@ public class User extends Model {
     }
 	
 	public String toString() {
-		return this.name + " (" + this.userid + ")";
+		return this.userid;
 	} 
 	
 	public static List<String> userListAsStrings(List<User> oldList) {

@@ -17,13 +17,13 @@
 		<div class="container">
 		<div class="row">
 		<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-			<a class="navbar-brand" href="./">ChangeManagement</a>
+			<a class="navbar-brand" href="../">ChangeManagement</a>
 			<ul class="nav pull-right">
                 <li id="fat-menu" class="dropdown">
                     <a href="" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">@user.name <span>(@user.userid)</span><b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit Profile</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">View My Changes</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="@routes.Application.logout()">Logout</a></li>
@@ -33,11 +33,15 @@
 		</nav>
 		</div>
 		<div class="row well">
+		<div class="panel-default">
 			<div class="col-xs-6 col-sm-3 sidebar" id="sidebar" role="navigation">
 			
             <ul class="nav">
 					<li><label class="tree-toggle nav-header">Changes</label></li>
-					<li class=""><a href="/changes/new"><i class="glyphicon glyphicon-chevron-right"></i> New Change</a></li>
+					<li class=""><a href="/changes/new"><i class="glyphicon glyphicon-chevron-right"></i> Initiate Change</a></li>
+					<li class=""><a href="/changes/build"><i class="glyphicon glyphicon-chevron-right"></i> Build Change</a></li>
+					<li><a href="/changes/approve"><i class="glyphicon glyphicon-chevron-right"></i> Initial Approval</a></li>
+					<li class=""><a href="/changes/analyse"><i class="glyphicon glyphicon-chevron-right"></i> Analyse Change</a></li>
 					<li><a href="/changes"><i class="glyphicon glyphicon-chevron-right"></i> View Changes</a></li>
 					<li><label class="tree-toggle nav-header">Outages</label></li>
 					<li class=""><a href="/outages/new"><i class="glyphicon glyphicon-chevron-right"></i> New Outage</a></li>
@@ -45,13 +49,17 @@
 					<li><label class="tree-toggle nav-header">Systems</label></li>
 					<li><a href="/systems/new"><i class="glyphicon glyphicon-chevron-right"></i> New System</a></li>
 					<li><a href="/systems"><i class="glyphicon glyphicon-chevron-right"></i> View Systems</a></li>
+					<li><label class="tree-toggle nav-header">Change Management</label></li>
+					<li><a href="/changemgmt/assign"><i class="glyphicon glyphicon-chevron-right"></i> Assign Change Builders</a></li>
+					<li><a href="/systems"><i class="glyphicon glyphicon-chevron-right"></i> TODO</a></li>
 			</ul>
 			</div>
 						
-			<div class="col-md-9 well">
+			<div class="col-md-9 panel panel-default">
+			
 			@body
 			</div>
-			
+		</div>	
 		</div>
 		</div>
     </body>

@@ -1,0 +1,7 @@
+@(change: Change)
+
+@if(change.initialApprovals()== "true"){
+	<div class="alert alert-success">All initial approvals are completed</div>
+} else {
+	<div class="alert alert-warning">Not all initial approvals are completed</div>
+}

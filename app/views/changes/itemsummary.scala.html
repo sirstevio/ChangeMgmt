@@ -1,11 +1,17 @@
 @(change: Change)
 
-<li data-task-id="@change.id">
-    @change.id</br>
-	<input type="checkbox" value=@change.iaoApproved></br>
-	@change.description</br>
-	@change.system.name/br>
-	
-    <button class="delete" href="@routes.Changes.delete(change.id)">Delete</button>
-    <span class="loader">Loading</span>
-</li>
+
+	<div class="panel-heading">
+		<h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse@change.id">
+          @change.summary
+		  <span class="badge pull-right">@change.id: @change.changeType</span>
+        </a>
+		</h4>
+	</div>
+	<div id="#collapse@change.id" class="panel-collapse collapse in">
+	<div class="panel-body">
+		@change.description</br>
+		Affected System: @change.system.name<span class="pull-right">Status: @change.status</span></br>
+		@change.iaoApproved @change.testApproved @change.sysOwnApproved @change.infAssurApproved 
+		<input type="checkbox" value=@change.iaoApproved>

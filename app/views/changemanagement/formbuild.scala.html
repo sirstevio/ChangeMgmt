@@ -1,0 +1,20 @@
+@(changeForm: Form[Change], change: Change)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@helper.form(action = routes.ChangeManagement.assignBuilder(change.id)) {
+	<fieldset>
+		@select(
+		changeForm("builder"), 
+		options = options(User.userListAsStrings(User.find.all)),
+		'_default -> "--- Select the Change Builder for the System ---",
+		'_label -> "Change Builder"
+		)
+		
+	</fieldset>
+	<div class="actions">
+        <input type="submit" class="btn primary" value="Assign">
+	</div>
+}

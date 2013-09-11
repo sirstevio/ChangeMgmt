@@ -12,12 +12,13 @@ public class Outage extends Model {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="outage_seq_gen")
 	@SequenceGenerator(name="outage_seq_gen", sequenceName="OUTAGE_SEQ", allocationSize=1, initialValue=1)
     public Long id;
-	@ManyToOne
-    public ICTSystem system;
-    public int length;
+	public int length;
     public String description;
+	public boolean isApproved;
     @ManyToOne
     public Change change;
+	@ManyToOne
+    public ICTSystem system;
 
     public Outage(int length, String desc, ICTSystem system, Change change) {
         //this.id = id;
@@ -25,6 +26,7 @@ public class Outage extends Model {
         this.description = desc;
 		this.system = system;
 		this.change = change;
+		this.isApproved = false;
     }
 
     public static Model.Finder<Long,Outage> find = new Model.Finder(Long.class, Outage.class);

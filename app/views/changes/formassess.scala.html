@@ -1,0 +1,29 @@
+@(changeForm: Form[Change], change: Change)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@helper.form(action = routes.Changes.changeAssess(change.id)) {
+	<span class="text-muted">Change Builder:</span> @change.builder.name</br></br>
+	<div class="alert alert-info alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		Complete the fields below and submit for initial approval.
+	</div>
+	<fieldset>
+				
+		<label for="businessImpactInput">Business impact of change</label>
+		<div data-toggle="tooltip" title="Describe the goals to be achieved by implementing the required change and the business benefits expected to be derived from this change.">
+			<textarea type="text" class="form-control" name="businessImpact" id="businessImpactInput" rows="3" placeholder="Business benefits..."></textarea>
+		</div>
+		
+		<label for="acceptanceCriteriaInput">Acceptance criteria of change</label>
+		<div data-toggle="tooltip" title="Describe the results of prior testing and what further testing may be necessary prior to implementing the change. Discuss you level of confidence that the change requested can be accomplished successfully according to the testing capability. If testing is not possible explain the change acceptance criteria.">
+			<textarea type="text" class="form-control" name="acceptanceCriteria" id="acceptanceCriteriaInput" rows="3" placeholder="Acceptance criteria..."></textarea>
+		</div>
+		
+	</fieldset>
+	<div class="actions">
+        <input type="submit" class="btn btn-primary" value="Submit for initial approval">
+	</div>
+}

@@ -1,13 +1,37 @@
-@(change: Change)
+@(change: Change, user: User))
 
-<li data-task-id="@change.id">
-    @change.id</br>
-	@change.description</br>
-	@change.system.name</br>
-	@change.status</br>
-	@change.iaoApproved @change.testApproved @change.sysOwnApproved @change.infAssurApproved 
-	<input type="checkbox" value=@change.iaoApproved></br>
+@main(user) {
+	<ol class="breadcrumb">
+		<li><a href="/">Dashboard</a></li>
+		<li><a href="/changes">All changes</a></li>
+		<li class="active">Change @change.id</li>
+	</ol>
 	
-    <button class="delete" href="@routes.Changes.delete(change.id)">Delete</button>
-    
-</li>
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse@change.id">
+          @change.summary
+		  <span class="badge pull-right">@change.id</span>
+        </a>
+		</h4>
+	</div>	
+	<div id="#collapse@change.id" class="panel-collapse collapse in">
+	@views.html.modals.modalnew(change)
+	
+	@if(change.status.ordinal > 1){
+		@views.html.modals.modalassess(change)
+	}
+	@if(change.status.ordinal > 1){
+		@views.html.modals.modalinitapproval(change)
+	}
+	@if(change.status.ordinal > 3){
+		@views.html.modals.modalanalysis(change)
+		@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList())
+	}
+	@if(change.status.ordinal > 4){
+		@views.html.modals.modalsia(change)
+	}
+	</div>		
+	</div>
+}

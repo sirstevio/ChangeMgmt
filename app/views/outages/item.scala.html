@@ -1,7 +1,22 @@
 @(outage: Outage)
 
-<li data-group="@outage.id">
-    <h4>@outage.description</h4>
-    <span class="systemname">@outage.id: System affected: @outage.system.name</span>
-	<span class="length">Outage Length: @outage.length hours</span>
-</li>
+	<div class="panel-group" id="accordion1">
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+		<a class="accordion-toggle" data-toggle="collapse" data-parent="accordion1" href="#collapse@outage.id">
+          @outage.description
+		  <span class="badge pull-right">@outage.id</span>
+        </a>
+		</h4>
+	</div>
+	<div id="#collapse@outage.id" class="panel-collapse collapse in">
+	<div class="panel-body">
+		<span class="text-muted">System affected:</span> @outage.system.name</br>
+		<span class="text-muted">Outage Length:</span> @outage.length hours
+		@outage.isApproved
+		<button type="button" class="btn btn-primary pull-right btn-sm" href="@routes.Outages.delete(outage.id)">Delete</button>
+	</div>
+	</div>		
+	</div>
+	</div>

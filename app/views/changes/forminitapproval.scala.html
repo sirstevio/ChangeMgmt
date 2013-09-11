@@ -1,0 +1,17 @@
+@(changeForm: Form[Change], change: Change)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@helper.form(action = routes.Changes.approve(change.id)) {
+	<span class="text-muted">Initial Approvals:</span> </br></br>
+	<div class="alert alert-info alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		Review the change and give initial approval if approved.
+	</div>
+	<div class="actions">
+        <input type="submit" class="btn btn-primary" value="Submit for initial approval">
+        <a class="btn btn-primary" title="Email a query" href="mailto:?subject=Change%20Query&amp;body=Be sure to include the reference to the change here">Email query</a>
+	</div>
+}

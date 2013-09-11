@@ -1,4 +1,4 @@
-@(changes: List[Change], user: User)
+@(changes: List[Change], user: User, changeForm: Form[Change])
 
 @main(user) {
 	<ol class="breadcrumb">
@@ -21,10 +21,7 @@
 							</div>
 							@views.html.modals.modalstart(change)
 							@views.html.modals.modalnew(change)
-							
-							@views.html.modals.modalinitapproval(change)
-							@views.html.modals.modalanalysis(change)
-							@views.html.modals.modalsia(change)
+							@views.html.changes.formassess(changeForm, change)
 							@views.html.modals.modalend(change)
 						}
 		}

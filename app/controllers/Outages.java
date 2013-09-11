@@ -68,7 +68,7 @@ public class Outages extends Controller {
 	/**
 	*	Delete an outage through this method.
 	*/
-	public static Result delete(Long change) {
+	public static Result delete(Long outageId) {
 		return TODO;
     }
 	

@@ -16,7 +16,9 @@ public class Application extends Controller {
         return ok(
 			index.render(
 				Change.find.all(),
-				User.find.byId(request().username())
+				User.find.byId(request().username()),
+				Change.find.findRowCount(),
+				Outage.find.findRowCount()
 			)
 		);
 	}	

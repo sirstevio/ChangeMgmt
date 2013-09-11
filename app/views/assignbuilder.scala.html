@@ -1,9 +1,9 @@
-@(changes: List[Change], user: User)
+@(changes: List[Change], user: User, changeForm: Form[Change])
 
 @main(user) {
 	<ol class="breadcrumb">
 		<li><a href="/">Dashboard</a></li>
-		<li class="active">All changes</li>
+		<li class="active">Unassigned Changes</li>
 	</ol>
 
 
@@ -14,17 +14,15 @@
 						@changes.map { change =>
 							<div class="panel panel-default">							
 							@views.html.changes.itemsummary(change)
-							<a href="@routes.Changes.view(change.id)" class="btn btn-default pull-right btn-sm">Full details</a>
-							<a data-toggle="modal" href="#changeModal@change.id"  class="btn btn-primary pull-right btn-sm">View Details</a>
+							<!-- Button trigger modal -->
+							<a data-toggle="modal" href="#changeModal@change.id"  class="btn btn-primary pull-right btn-sm">Assign Change Builder</a>
+							
 							</div>
-							</div>
+							</div>	
 							</div>
 							@views.html.modals.modalstart(change)
 							@views.html.modals.modalnew(change)
-							
-							@views.html.modals.modalinitapproval(change)
-							@views.html.modals.modalanalysis(change)
-							@views.html.modals.modalsia(change)
+							@views.html.changemanagement.formbuild(changeForm, change)
 							@views.html.modals.modalend(change)
 						}
 		}

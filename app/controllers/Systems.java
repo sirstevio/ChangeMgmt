@@ -16,6 +16,10 @@ public class Systems extends Controller {
 	*	Add a new system through this method.
 	*/
 	public static Result add() {
+	System.out.println("Trying to add");
+	System.out.println(form().bindFromRequest().get("name"));
+	System.out.println(form().bindFromRequest().get("iao"));
+	System.out.println(form().bindFromRequest().get("systemOwner"));
 		ICTSystem newSystem= ICTSystem.create(
 			form().bindFromRequest().get("name"),
 			form().bindFromRequest().get("iao"),
@@ -76,7 +80,7 @@ public class Systems extends Controller {
 	/**
 	*	Delete a system through this method.
 	*/
-	public static Result delete(Long change) {
+	public static Result delete(Long systemId) {
 		return TODO;
     }
 	

@@ -8,23 +8,19 @@
 @main(user) {
     
     @helper.form(action = routes.Changes.add) {
-        
+	
+		<ol class="breadcrumb">
+			<li><a href="/">Dashboard</a></li>
+			<li class="active><a href="/changes">Initiate a change</a></li>
+		</ol>
         <fieldset>
-            <legend>Create a Change</legend>
-            
-            @inputText(
-                changeForm("summary"), 
-				'_label -> "Change Summary",
-                '_help -> "Enter a Summary of the Change.",
-				'_error -> changeForm.globalError
-            )
+			<label for="summaryInput">Change Summary</label>
+			<input type="text" class="form-control" name="summary" id="summaryInput" placeholder="Enter a summary of the Change...">
 			
-			@inputText(
-                changeForm("description"), 
-				'_label -> "Change Description",
-                '_help -> "Enter the full description of the Change.",
-				'_error -> changeForm.globalError
-            )
+			<label for="descriptionInput">Brief description of change</label>
+            <div data-toggle="tooltip" title="Brief description of the requested change, systems affected and why it is necessary.">
+			<textarea type="text" class="form-control" name="description" id="descriptionInput" rows="3" placeholder="Enter a description of the Change..."></textarea>
+			</div>
 			
 			@select(
                 changeForm("system"), 
@@ -33,15 +29,55 @@
                 '_label -> "System"
                 
             )
-            
+			
+			@select(
+                changeForm("environment"), 
+                options = options(Change.environmentList()),
+                '_default -> "--- Choose an Environment ---",
+                '_label -> "Environment"
+                
+            )
+			
+			
+			<div class="radio">
+			  <label>
+				<input type="radio" name="type" id="typeRadios1" value="NONSTANDARD" checked>
+				Non-Standard Change
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+				<input type="radio" name="type" id="typeRadios2" value="STANDARD">
+				Standard Change
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+				<input type="radio" name="type" id="typeRadios3" value="EMERGENCY">
+				Emergency Change
+			  </label>
+			</div>
+			
+			<div class="checkbox">
+				<label>
+				<input type="checkbox" name="builderCheckbox">
+				Is the Change Initiator implementing the change?
+				</label>
+			</div>
         </fieldset>
         
-
-        
-
+		<div class="control-group">  
+            <label class="control-label" for="optionsCheckbox">Checkbox</label>  
+            <div class="controls">  
+              <label class="checkbox">  
+                <input type="checkbox" id="optionsCheckbox" value="option1">  
+                Option one is this and that be sure to include why it's great  
+              </label>  
+            </div>  
+          </div>  
         
         <div class="actions">
-            <input type="submit" class="btn primary" value="Sign Up">
+            <input type="submit" class="btn primary" value="Submit">
             <a href="@routes.Application.index" class="btn">Cancel</a>
         </div>
         

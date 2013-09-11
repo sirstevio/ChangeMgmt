@@ -53,6 +53,11 @@
     sysOwnApproved:   false
     infAssurApproved: false
     status:           ASSESSMENT
+    environment:      CORPORATENETWORK
+    changeType:       NONSTANDARD
+    initiator:        *bob
+    businessImpact:   Some information should go here that describes the business impact of this change and how important it is and why we're doing it.
+    builder:          *bob
 
 - &change2 !!models.Change
     summary:          Relocate email server
@@ -63,6 +68,11 @@
     sysOwnApproved:   true
     infAssurApproved: false
     status:           ASSESSMENT
+    environment:      SECURENETWORK
+    changeType:       NONSTANDARD
+    initiator:        *jeff
+    businessImpact:   Some information should go here that describes the business impact of this change and how important it is and why we're doing it.
+    builder:          *bob
 
 - &change3 !!models.Change
     summary:          New BusBar installed
@@ -73,6 +83,10 @@
     sysOwnApproved:   false
     infAssurApproved: false
     status:           NEW
+    environment:      CORPORATENETWORK
+    changeType:       NONSTANDARD
+    initiator:        *jane
+    businessImpact:   Some information should go here that describes the business impact of this change and how important it is and why we're doing it.
 
 # Outages
 

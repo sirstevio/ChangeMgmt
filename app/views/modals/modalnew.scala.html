@@ -1,0 +1,10 @@
+@(change: Change)
+
+<div class="panel-body">
+	<span class="text-muted">Description: </span></br>
+	@change.description</br></br>
+	<span class="text-muted">Affected System:</span> @change.system.name
+	<span class="pull-right"><span class="text-muted">Status:</span> @change.status</span></br>
+	<span class="text-muted">Environment:</span> @change.environment
+	<span class="pull-right"><span class="text-muted">Type:</span> @change.changeType</span>
+</div>

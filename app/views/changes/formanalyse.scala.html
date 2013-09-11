@@ -1,0 +1,34 @@
+@(changeForm: Form[Change], change: Change)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@helper.form(action = routes.Changes.submitAnalyse(change.id)) {
+	<div class="alert alert-info alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		Complete the fields below and submit your assessment of the change as change builder.
+	</div>
+	<fieldset>
+				
+		<label for="testDescriptionInput">Technical description of the change.</label>
+		<div data-toggle="tooltip" title="Provide technical description of the change, outline the development plan and risks associated with this include references to other documentation in support of this change.">
+			<textarea type="text" class="form-control" name="testDescription" id="testDescriptionInput" rows="3" placeholder="Technical Description..."></textarea>
+		</div>
+		
+		<label for="testPlanInput">Outline the Testing Plan</label>
+		<div data-toggle="tooltip" title="Describe the results of prior testing and what further testing may be necessary prior to implementing the change. Discuss you level of confidence that the change requested can be accomplished successfully according to the testing capability. If testing is not possible explain the change acceptance criteria.">
+			<textarea type="text" class="form-control" name="testPlan" id="testPlanInput" rows="3" placeholder="Testing Plan..."></textarea>
+		</div>
+		
+		<label for="rollBackPlanInput">Roll Back Plan</label>
+		<div data-toggle="tooltip" title="Outline the Roll Back Plan and any associated risks with this">
+			<textarea type="text" class="form-control" name="rollBackPlan" id="rollBackPlanInput" rows="3" placeholder="Rollback plan..."></textarea>
+		</div>
+		
+	</fieldset>
+	
+	<div class="actions">
+        <input type="submit" class="btn btn-primary" value="Submit change assessment">
+	</div>
+}

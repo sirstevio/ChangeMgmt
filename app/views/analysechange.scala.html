@@ -1,9 +1,9 @@
-@(changes: List[Change], user: User)
+@(changes: List[Change], user: User, changeForm: Form[Change], outages: List[Outage])
 
 @main(user) {
 	<ol class="breadcrumb">
 		<li><a href="/">Dashboard</a></li>
-		<li class="active">All changes</li>
+		<li class="active">Changes awaiting analysis</li>
 	</ol>
 
 
@@ -21,10 +21,10 @@
 							</div>
 							@views.html.modals.modalstart(change)
 							@views.html.modals.modalnew(change)
-							
+							@views.html.modals.modalassess(change)
 							@views.html.modals.modalinitapproval(change)
-							@views.html.modals.modalanalysis(change)
-							@views.html.modals.modalsia(change)
+							@views.html.changes.formanalyse(changeForm, change)
+							@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList())
 							@views.html.modals.modalend(change)
 						}
 		}

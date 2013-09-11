@@ -1,18 +1,25 @@
-@(changes: List[Change], user: User)
+@(changes: List[Change], user: User, changeCount: Int, outageCount: Int)
 
 @main(user) {
-
-    <header>
-        <hgroup>
-            <h1>Dashboard</h1>
-        </hgroup>
-    </header>
+	<ol class="breadcrumb">
+		<li class="active"><a href="/">Dashboard</a></li>
+	</ol>
 	
-	<article  class="changes">
-		
-        
-    </article>
-
-
-
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Changes</h3>
+	</div>
+	<div class="panel-body">
+		There are a total of @changeCount changes currently in the system.
+	</div>
+	</div>
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Outages</h3>
+	</div>
+	<div class="panel-body">
+		There are a total of @outageCount outages currently in the system.</br>
+		There are x outages scheduled for the next 7 days.
+	</div>
+	</div>
 }

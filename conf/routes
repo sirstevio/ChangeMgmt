@@ -17,17 +17,31 @@ POST	/login						controllers.Application.authenticate()
 
 PUT     /changes/:change          	controllers.Changes.changeSummary(change: Long)
 
-DELETE  /changes/:change          	controllers.Changes.delete(change: Long)
-
 # New area working on...
 GET		/changes					controllers.Changes.viewChanges()
+DELETE  /changes		          	controllers.Changes.delete(change: Long)
 GET		/changes/new				controllers.Changes.blank()
 POST    /changes/new               	controllers.Changes.add()
+GET		/changes/build				controllers.Changes.viewBuild()
+POST	/changes/build				controllers.Changes.changeAssess(change: Long)
+GET		/changes/approve			controllers.Changes.viewInitialApproval()
+POST	/changes/approve			controllers.Changes.approve(change: Long)
+
+GET		/changes/analyse			controllers.Changes.viewAnalysis()
+POST	/changes/analyse			controllers.Changes.submitAnalyse(change: Long)
+
+GET		/changes/:change			controllers.Changes.view(change:Long)
 
 GET		/outages					controllers.Outages.viewOutages()
 GET		/outages/new				controllers.Outages.blank()
 POST    /outages/new                controllers.Outages.add()
+DELETE  /outages		          	controllers.Outages.delete(outage: Long)
 
 GET		/systems					controllers.Systems.viewSystems()
 GET		/systems/new				controllers.Systems.blank()
 POST    /systems/new                controllers.Systems.add()
+DELETE  /systems		          	controllers.Systems.delete(system: Long)
+
+GET		/changemgmt/assign			controllers.ChangeManagement.assignBuild()
+POST    /changemgmt/assign          controllers.ChangeManagement.assignBuilder(change: Long)
+

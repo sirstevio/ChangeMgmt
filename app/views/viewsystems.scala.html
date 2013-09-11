@@ -2,26 +2,21 @@
 
 @main(user) {
 	<ol class="breadcrumb">
-		<li><a href="#">Dashboard</a></li>
+		<li><a href="/">Dashboard</a></li>
 		<li class="active">All Systems</li>
 	</ol>
 
-    <article  class="systems">
-		@systems.groupBy(_.iao).map {
+	<div class="panel-group  panel-default" id="accordion">
+	@systems.groupBy(_.iao).map {
             case (iao, systems) => {
-                <div class="folder" data-folder-id="@iao.userid">
-                    <header>
-                        <h3>@iao.userid</h3>
-                    </header>
-                        <ul class="list">
-                            @systems.map { system =>
+						@systems.map { system =>
+								<div class="accordion" id="accordion1"><div class="panel panel-default">
                                 @views.html.systems.item(system)
-                            }
-                        </ul>
-                </div>
-            }
-        }
-
-    </article>
+								</div>
+						}
+		}
+	}
+	</div>
+	
 
 }

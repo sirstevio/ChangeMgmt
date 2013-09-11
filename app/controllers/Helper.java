@@ -35,4 +35,10 @@ public abstract class Helper {
 		return newList;
 	}
 
+	/**
+	*	Returns a list of changes filtered by the status argument passed to it
+	*/
+	public static List<Change> filteredChangeList(Change.Status status) {
+		return Change.find.where().eq("status", status).findList();
+	}
 }
