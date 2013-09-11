@@ -1,0 +1,47 @@
+@(outageForm: Form[Outage], change: Change)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@helper.form(action = routes.Outages.add) {
+<div class="panel-body">
+	<fieldset>
+		@inputText(
+			outageForm("length"), 
+			'_label -> "Outage length",
+			'_help -> "Enter the length of the Outage.",
+			'_error -> outageForm.globalError
+		)
+		
+		@inputText(
+			outageForm("description"), 
+			'_label -> "Outage Description",
+			'_help -> "Enter the full description of the Outage.",
+			'_error -> outageForm.globalError
+		)
+		
+		@select(
+			outageForm("system"), 
+			options = options(ICTSystem.systemListAsStrings(ICTSystem.find.all)),
+			'_default -> "--- Choose a System ---",
+			'_label -> "System affected: "
+			
+		)
+		
+		<label for="changeInput">Change this outage is associated with:</label>
+		<input type="text" class="form-control" name="change" id="changeInput" value="@change.summary" placeholder="Enter a summary of the Change..." ></br>
+		
+	</fieldset>
+<div>
+
+	
+
+	
+	<div class="actions">
+		<input type="submit" class="btn primary" value="Sign Up">
+		<a href="@routes.Application.index" class="btn">Cancel</a>
+	</div>
+	
+}
+    

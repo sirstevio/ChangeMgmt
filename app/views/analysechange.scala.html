@@ -24,7 +24,7 @@
 							@views.html.modals.modalassess(change)
 							@views.html.modals.modalinitapproval(change)
 							@views.html.changes.formanalyse(changeForm, change)
-							@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList())
+							@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList(), change)
 							@views.html.modals.modalend(change)
 						}
 		}

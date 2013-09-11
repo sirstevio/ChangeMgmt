@@ -27,7 +27,7 @@
 	}
 	@if(change.status.ordinal > 3){
 		@views.html.modals.modalanalysis(change)
-		@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList())
+		@views.html.outages.outagetable(Outage.find.where().eq("change", change).findList(), change)
 	}
 	@if(change.status.ordinal > 4){
 		@views.html.modals.modalsia(change)

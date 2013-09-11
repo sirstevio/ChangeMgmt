@@ -16,6 +16,7 @@ public class Outages extends Controller {
 	*	Add a new outage through this method.
 	*/
 	public static Result add() {
+	System.out.println(form().bindFromRequest().get("change"));
 		Outage newOutage= Outage.create(
 			form().bindFromRequest().get("length"),
 			form().bindFromRequest().get("description"), form().bindFromRequest().get("system"),
@@ -24,10 +25,21 @@ public class Outages extends Controller {
 		System.out.println("Using add");
 		return redirect(routes.Outages.viewOutages());
 	}	
+	
+	public static Result addFromModal() {
+		Outage newOutage= Outage.create(
+			form().bindFromRequest().get("length"),
+			form().bindFromRequest().get("description"), form().bindFromRequest().get("system"),
+			form().bindFromRequest().get("change")
+		);
+		System.out.println("Using add");
+		return redirect(routes.Outages.viewOutages());
+	}	
+	
 	/**
 	*	Defines a form wrapping the Outage class
 	*/
-	final static Form<Outage> newOutageForm = form(Outage.class);
+	public final static Form<Outage> newOutageForm = form(Outage.class);
 	
 	/**
      * Display a blank form.
@@ -69,7 +81,10 @@ public class Outages extends Controller {
 	*	Delete an outage through this method.
 	*/
 	public static Result delete(Long outageId) {
-		return TODO;
+		System.out.println(outageId);
+		Outage.find.byId(outageId).delete();
+		
+		return ok();
     }
 	
 	

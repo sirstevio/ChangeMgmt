@@ -35,7 +35,7 @@ GET		/changes/:change			controllers.Changes.view(change:Long)
 GET		/outages					controllers.Outages.viewOutages()
 GET		/outages/new				controllers.Outages.blank()
 POST    /outages/new                controllers.Outages.add()
-DELETE  /outages		          	controllers.Outages.delete(outage: Long)
+DELETE  /outages/:outage          	controllers.Outages.delete(outage: Long)
 
 GET		/systems					controllers.Systems.viewSystems()
 GET		/systems/new				controllers.Systems.blank()
